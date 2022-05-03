@@ -17,3 +17,19 @@ a {
 a:hover {
   color: var(--onbackground);
 }
+.btn {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  width: fit-content;
+  padding: 0 2rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px grey;
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
