@@ -1,7 +1,6 @@
-import categories from './categories'
 import CategoryItem from '../categories/category-item.component'
 
-function Directory() {
+function Directory({ categories }) {
   return (
     <div className='categories-container'>
       {categories.map((category) => {
