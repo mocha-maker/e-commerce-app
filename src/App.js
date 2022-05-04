@@ -1,8 +1,8 @@
 import { Routes, Route, NavLink } from 'react-router-dom'
-import Home from './routes/pages/home.component'
-import Shop from './routes/pages/shop.component'
+import Home from './routes/pages/home/home.component'
+import Shop from './routes/pages/shop/shop.component'
 import Navigation from './routes/nav/navigation.component'
-import Authentication from './routes/pages/authentication'
+import Authentication from './routes/pages/auth/authentication.component'
 
 function App() {
   return (

@@ -9,13 +9,13 @@ import Button from '../button/button.component'
 
 function SignUpForm() {
   const [formData, setFormData] = useState({
-    name: '',
+    displayName: '',
     email: '',
     password: '',
     password2: '',
   })
 
-  const { name, email, password, password2 } = formData
+  const { displayName, email, password, password2 } = formData
 
   const navigate = useNavigate()
 
@@ -44,11 +44,12 @@ function SignUpForm() {
         const { user } = await response
 
         // Create user doc
-        await createUserDocFromAuth(user, { displayName: name })
-
+        await createUserDocFromAuth(user, { displayName })
         // Navigate to Home
         navigate('/')
-      } catch (error) {}
+      } catch (error) {
+        console.log(error)
+      }
     } else {
       console.log('Passwords do not match')
       resetPasswordFields()
@@ -59,13 +60,13 @@ function SignUpForm() {
     <div className='form'>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
-      <form onSubmit={onSubmit} className='form'>
+      <form onSubmit={onSubmit}>
         <FormInput
           label='Display Name'
-          id='name'
-          name='name'
+          id='displayName'
+          name='displayName'
           type='text'
-          value={name}
+          value={displayName}
           onChange={onChange}
           required
         />

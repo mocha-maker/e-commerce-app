@@ -1,13 +1,13 @@
-import { logRoles } from '@testing-library/react'
 import { initializeApp } from 'firebase/app'
 import {
   getAuth,
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
-  EmailAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
@@ -22,7 +22,7 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig)
+initializeApp(firebaseConfig)
 
 // Set up Google provider
 const googleProvider = new GoogleAuthProvider()
@@ -38,7 +38,6 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider)
 
 // Set up Email Provider
-const emailProvider = new EmailAuthProvider()
 export const createAuthUserFromEmail = async (email, password) => {
   if (!email || !password) return
   return await createUserWithEmailAndPassword(auth, email, password)
@@ -72,4 +71,10 @@ export const createUserDocFromAuth = async (userAuth, additionalInfo = {}) => {
       console.log('Error:' + error)
     }
   }
+}
+
+export const signOutUser = async () => signOut(auth)
+
+export const onAuthStateChangedListener = (callback) => {
+  callback && onAuthStateChanged(auth, callback)
 }

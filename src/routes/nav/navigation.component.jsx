@@ -1,8 +1,16 @@
+import { useContext } from 'react'
 import { Outlet, Link } from 'react-router-dom'
-import { ReactComponent as Logo } from '../../assets/logo.svg'
+import { UserContext } from '../../context/user.context'
+import { signOutUser } from '../../utils/firebase/firebase.utils'
+
+// Components
 import './navigation.styles.scss'
+import { ReactComponent as Logo } from '../../assets/logo.svg'
+import { BsPersonCircle } from 'react-icons/bs'
 
 function Navigation() {
+  const { currentUser } = useContext(UserContext)
+
   return (
     <>
       <div className='navigation'>
@@ -18,9 +26,15 @@ function Navigation() {
           <Link className='nav-link' to='/contact'>
             CONTACT
           </Link>
-          <Link className='nav-link' to='/sign-in'>
-            SIGN IN
-          </Link>
+
+          {!currentUser ? (
+            <Link className='nav-link' to='/sign-in'>
+              SIGN IN
+            </Link>
+          ) : (
+            <span onClick={signOutUser}>SIGN OUT</span>
+          )}
+          <BsPersonCircle />
         </div>
       </div>
       <Outlet />

@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import {
-  createUserDocFromAuth,
   signInWithEmail,
   signInWithGooglePopup,
 } from '../../utils/firebase/firebase.utils'
-import { useNavigate } from 'react-router-dom'
 import FormInput from '../form-input/form-input.component'
 import Button from '../button/button.component'
 import { FcGoogle } from 'react-icons/fc'
@@ -16,8 +14,6 @@ function SignInForm() {
   })
 
   const { email, password } = formData
-
-  const navigate = useNavigate()
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -39,13 +35,7 @@ function SignInForm() {
 
     try {
       console.log('Attempting sign in')
-
-      // login user if exists
-      const response = await signInWithEmail(email, password)
-      console.log(response.user)
-
-      // Navigate to Home
-      response.user && navigate('/')
+      await signInWithEmail(email, password)
     } catch (error) {
       console.log('Bad Credentials')
       resetFields()
@@ -55,9 +45,7 @@ function SignInForm() {
   const logGoogleUser = async (e) => {
     e.preventDefault()
     console.log('Sign-in with Google Popup')
-    const { user } = await signInWithGooglePopup()
-    await createUserDocFromAuth(user)
-    user && navigate('/')
+    await signInWithGooglePopup()
   }
 
   return (
