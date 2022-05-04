@@ -1,15 +1,24 @@
 import { useContext } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { UserContext } from '../../context/user.context'
+import { CartContext } from '../../context/cart.context'
 import { signOutUser } from '../../utils/firebase/firebase.utils'
 
 // Components
 import './navigation.styles.scss'
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import { BsPersonCircle } from 'react-icons/bs'
+import CartIcon from '../../components/cart-icon/cart-icon.component'
+import CartDropDown from '../../components/cart-dropdown/cart-dropdown.component'
 
 function Navigation() {
   const { currentUser } = useContext(UserContext)
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext)
+
+  const toggleCart = (e) => {
+    setIsCartOpen(!isCartOpen)
+    console.log(isCartOpen)
+  }
 
   return (
     <>
@@ -32,10 +41,16 @@ function Navigation() {
               SIGN IN
             </Link>
           ) : (
-            <span onClick={signOutUser}>SIGN OUT</span>
+            <span className='nav-link' onClick={signOutUser}>
+              SIGN OUT
+            </span>
           )}
-          <BsPersonCircle />
+          <Link className='nav-link' to='/profile'>
+            <BsPersonCircle />
+          </Link>
+          <CartIcon onClick={toggleCart} />
         </div>
+        {isCartOpen && <CartDropDown />}
       </div>
       <Outlet />
     </>

@@ -5,13 +5,19 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './index.scss'
 import UserProvider from './context/user.context'
+import StoreProvider from './context/store.context'
+import CartProvider from './context/cart.context'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <StoreProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </StoreProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
