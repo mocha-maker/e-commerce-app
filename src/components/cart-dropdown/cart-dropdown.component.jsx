@@ -14,6 +14,7 @@ export default function CartDropDown() {
           <CartItem key={item.id} cartItem={item} />
         ))}
       </div>
+      <div className='cart-total'></div>
       <Button>Check out</Button>
     </div>
   )

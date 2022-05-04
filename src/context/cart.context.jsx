@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 // Handle addCart logic
 const addToCartHandler = (productToAdd, cartItems) => {
@@ -22,9 +22,20 @@ export const CartContext = createContext({
   setCartItems: () => [],
 })
 
+// Main Cart Context Provider
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState([])
+  const [cartCount, setCartCount] = useState(0)
+  const [cartTotal, setCartTotal] = useState(0)
+
+  useEffect(() => {
+    const newCartCount = cartItems.reduce(
+      (curTotal, curItem) => curTotal + curItem.qty,
+      0
+    )
+    setCartCount(newCartCount)
+  }, [cartItems])
 
   const addItemToCart = (product) => {
     setCartItems(addToCartHandler(product, cartItems))
@@ -35,6 +46,7 @@ export const CartProvider = ({ children }) => {
     setIsCartOpen,
     cartItems,
     addItemToCart,
+    cartCount,
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
