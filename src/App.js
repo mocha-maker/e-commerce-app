@@ -4,7 +4,7 @@ import Shop from './routes/pages/shop/shop.component'
 import Navigation from './routes/nav/navigation.component'
 import Authentication from './routes/pages/auth/authentication.component'
 import Settings from './routes/pages/settings/settings.component'
-import Orders from './routes/pages/orders/orders.component'
+import Checkout from './routes/pages/checkout/checkout.component'
 import Contact from './routes/pages/contact/contact.component'
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path='/sign-in' element={<Authentication />}></Route>
           <Route path='/shop' element={<Shop />}></Route>
           <Route path='/profile' element={<Settings />}></Route>
-          <Route path='/cart' element={<Orders />}></Route>
+          <Route path='/cart' element={<Checkout />}></Route>
           <Route path='/contact' element={<Contact />}></Route>
         </Route>
       </Routes>
