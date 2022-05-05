@@ -4,13 +4,20 @@ import ProductCard from '../../../components/product-card/product-card.component
 import { StoreContext } from '../../../context/store.context'
 
 function Shop() {
-  const { products } = useContext(StoreContext)
+  const { categoriesMap } = useContext(StoreContext)
   return (
-    <div className='products-container'>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+    <>
+      {Object.keys(categoriesMap).map((title) => (
+        <>
+          <h2 className='title'>{title}</h2>
+          <div className='products-container'>
+            {categoriesMap[title].map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </>
       ))}
-    </div>
+    </>
   )
 }
 export default Shop

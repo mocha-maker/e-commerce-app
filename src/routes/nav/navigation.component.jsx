@@ -25,7 +25,8 @@ function Navigation() {
       <div className='navigation'>
         <div className='logo-container'>
           <Link className='logo' to='/'>
-            <Logo />
+            <Logo className='logo-img' />
+            <span>RUGGED HUMANS</span>
           </Link>
         </div>
         <div className='nav-links-container'>

@@ -6,6 +6,7 @@ import Authentication from './routes/pages/auth/authentication.component'
 import Settings from './routes/pages/settings/settings.component'
 import Checkout from './routes/pages/checkout/checkout.component'
 import Contact from './routes/pages/contact/contact.component'
+import Category from './routes/pages/shop/category.component'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path='/sign-in' element={<Authentication />}></Route>
           <Route path='/shop' element={<Shop />}></Route>
+          <Route path='/shop/:category' element={<Category />}></Route>
           <Route path='/profile' element={<Settings />}></Route>
           <Route path='/cart' element={<Checkout />}></Route>
           <Route path='/contact' element={<Contact />}></Route>
